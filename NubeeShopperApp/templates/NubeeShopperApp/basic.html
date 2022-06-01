@@ -12,11 +12,10 @@
       {% endblock %}
     </style>
 
-
     <title>{% block title %} {% endblock %}</title>
   </head>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/NubeeShopperApp">NobeeShopper</a>
+    <a class="navbar-brand" href="/NubeeShopperApp/">NobeeShopper</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/NubeeShopperApp">Home<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/NubeeShopperApp/">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="/NubeeShopperApp/about">About<span class="sr-only">(current)</span></a>
@@ -41,16 +40,36 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
       <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" >
-
-
   Cart(<span id="cart">0</span>)
 </button>
+      {% if user.is_authenticated %}
+      <!-- <h5 style="color: white;">Welcome {{ username_html }}</h5> -->
+      <span>
+        <a onclick='clearCart()' id ='clearCart' href="signout"><button type="button" class="btn btn-primary mx-2">Logout</button></a>
+      </span>
+      {% else %}
+      <span>
+        <a href="signin"><button type="button" class="btn btn-primary mx-2">Login</button></a>
+      </span>
+
+      <span>
+        <a href="signup"><button type="button" class="btn btn-primary mx-2">SignUp</button></a>
+      </span>
+
+      {% endif %}
     </div>
   </nav>
 
   <!-- BODY TEMPLATE INHERITANCE FOR ANY OTHER PAGE TO USE -->
   <body>
-
+    {% if user.is_authenticated %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Hello {{ username_html }}</strong> You're Successfully logged in!
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endif %}
     {% block body %} {% endblock %}
 
 

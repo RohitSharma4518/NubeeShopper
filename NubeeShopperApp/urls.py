@@ -3,7 +3,10 @@ from NubeeShopperApp import views
 from django.urls import path
 
 urlpatterns = [
-    path('', views.index, name="homepage"),
+    path('', views.home, name="home"),
+    path('signin', views.signin, name="signin"),
+    path('signup', views.signup, name="signup"),
+    path('signout', views.signout, name="signout"),
     path('about', views.about, name="about"),
     path('contact', views.contact, name="contact"),
     path("productview/<int:myid>", views.productview, name="productview"),
